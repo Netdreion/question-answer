@@ -3,6 +3,11 @@ import questions from "./Data";
 
 const RenderPage = () => {
   const [question, setQuestion] = useState(questions);
+  const [infoShow, setInfoShow] = useState(false);
+
+  const showInfo = () => {
+    infoShow === true ? setInfoShow(false) : setInfoShow(true);
+  };
 
   return (
     <>
@@ -12,11 +17,12 @@ const RenderPage = () => {
           <ul>
             {question.map((item) => {
               return (
-                <li key={question.id}>
-                  <h5>
-                    {item.title}
-                    <p> {item.info}</p>
-                  </h5>
+                <li key={item.id}>
+                  <h5>{item.title}</h5>
+                  <span>
+                    <button onClick={showInfo}>{infoShow ? "+" : "-"}</button>
+                  </span>
+                  {infoShow && <p> {item.info}</p>}
                 </li>
               );
             })}
